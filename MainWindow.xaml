@@ -1,0 +1,142 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+ 
+        <StackPanel Grid.Column="0"  Grid.RowSpan="2" Background="black" >
+            <TextBlock 
+             Foreground="White"
+            FontSize="20"
+           FontWeight="Bold"
+           Margin="10"
+           Text="ADMIN PANEL" />
+
+            <Button 
+          FontSize="20"  
+          Padding="5" 
+           Margin="5 50 5 0"
+          Background="Black"
+          Foreground="White"
+          Click="Add_user"
+        
+        >Add User</Button>
+
+
+            <Button 
+             FontSize="20"  
+            Padding="5" 
+             Margin="5 50 5 0"
+              Background="Black"
+               Foreground="White"
+            
+             >User History</Button>
+
+
+
+        </StackPanel>
+        
+     
+
+        <TextBlock  Grid.Row="2"   Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center"
+                    
+                    FontSize="10"
+                    Text="copy right@" />
+
+        <TextBox    Grid.Row="0"   Grid.Column="1"
+                x:Name="SearchTextBox"
+                 GotFocus="SearchTextBox_GotFocus"
+               LostFocus="SearchTextBox_LostFocus" 
+                  
+                Text="Search here..."
+                TextChanged="SearchTextBox_TextChanged" 
+                Margin="5,0,40,0"
+                BorderThickness="2"
+                VerticalContentAlignment="Center"
+                FontSize="14" />
+        
+        
+        <Button  Grid.Row="0"   Grid.Column="1"
+                Content="🔍"
+                 HorizontalAlignment="Right"
+                Background="RoyalBlue"
+                Foreground="White"
+                Width="30"
+                Height="25"
+               
+                BorderThickness="0"
+                />
+
+
+        <DataGrid x:Name="Usergrid" AutoGenerateColumns="False"  Grid.Row="1" 
+    Grid.Column="1"
+          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+          CanUserAddRows="False" Margin="10">
+            <DataGrid.Columns>
+               
+                <DataGridTextColumn     Header="ID" Binding="{Binding Id}" Width="50" />
+
+              
+                <DataGridTextColumn Header="Username" Binding="{Binding UserName}" Width="150"/>
+
+              
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+
+              
+                <DataGridTextColumn Header="Password" Binding="{Binding Password}" Width="100"/>
+
+              
+                <DataGridTemplateColumn Header="EDIT" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="EDIT" 
+                                    Click="edit_user"
+                            Background="blue" 
+                            Foreground="White" 
+                            Width="75" 
+                            Margin="5" 
+                            Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+               
+                <DataGridTemplateColumn Header="DELETE" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="DELETE" 
+                             
+                                    Click="remove_user"
+                                   
+                            Background="Red" 
+                            Foreground="White" 
+                            Width="75" 
+                            Margin="5" 
+                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            CommandParameter="{Binding}"
+                                    />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Grid>
+</Window>
