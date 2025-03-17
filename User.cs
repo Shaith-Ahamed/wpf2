@@ -16,6 +16,10 @@ namespace WpfApp1
             public string? Password { get; set; }
 
 
+        // Establish a relationship with Enrollment table
+        public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+
+
 
     }
 }
